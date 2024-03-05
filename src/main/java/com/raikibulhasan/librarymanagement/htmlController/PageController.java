@@ -37,14 +37,14 @@ public class PageController { //
 
         // User user_registered=userRepository.save(user);
         //model.addAttribute("fname",user.getFname());
-        return "AddBook";
+        return "home";
     }
     @PostMapping("/nice")
     public String userRegistration(@ModelAttribute User user, Model model){
         System.out.println(user.toString());
         User user_registered=userRepository.save(user);
         model.addAttribute("fname",user.getFname());
-        return "AddBook";
+        return "view";
      }
 
 
@@ -57,8 +57,11 @@ public class PageController { //
 
         // User user_registered=userRepository.save(user);
         //model.addAttribute("fname",user.getFname());
-        return "AddBook";
-    }}
+        return "view";
+    }
+
+
+}
 //    @RequestMapping("/schedulerPage")
 //    public String scheduler(@ModelAttribute User user,Model model){
 //        //System.out.println(user.toString());
