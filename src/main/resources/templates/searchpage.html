@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/addbook.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/searchpage.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!--    <script type="text/javascript" th:src="@{js/logic.js}"></script>-->
 
 </head>
@@ -12,6 +12,7 @@
 <div id='stars'></div>
 <div id='stars2'></div>
 <div id='stars3'></div>
+
 
 
 <nav class="main-menu">
@@ -134,28 +135,16 @@
 </nav>
 
 <!-- parallax text/java -->
-<div id="container" class="container">
 
-    <!-- text -->
-    <div class="form-container">
-
-
-        <form action="addedBook" method="post">
-            <h1>Add New Book</h1>
-            <img src="../static/img.jpg"/>
-            <input type="text" name="isbn" placeholder="ISBN#"/>
-            <input type="text" name="title" placeholder="Title"/>
-            <input type="text" name="author" placeholder="Author"/>
-            <input type="text" name="publicationDate" placeholder="Publication Date"/>
-            <input type="text" name="genre" placeholder="Genre"/>
-            <input type="text" name="status" placeholder="Status"/>
-            <button>Submit</button>
-        </form>
+        <!-- text -->
+        <div class="container1">
 
 
-    </div>
+            <input type="text" placeholder="Search...">
+            <div class="search"></div>
 
 
-</div>
+        </div>
+
 </body>
 </html>
