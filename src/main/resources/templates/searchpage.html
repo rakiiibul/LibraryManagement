@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" type="text/css" th:href="@{css/searchpage.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/view.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!--    <script type="text/javascript" th:src="@{js/logic.js}"></script>-->
 
@@ -137,14 +138,99 @@
 <!-- parallax text/java -->
 
         <!-- text -->
-        <div class="container1">
+<div class="container1">
 
 
-            <input type="text" placeholder="Search...">
-            <div class="search"></div>
+    <input type="text" id="searchInput" placeholder="Search by book title..." />
+<!--    //<ol id="searchResults" class="image-list list-view"></ol>-->
 
 
-        </div>
+
+    <div class="search"></div>
+    <ol class="image-list list-view">
+
+
+    </ol>
+    <div id="searchResultsContainer" class="search-results-container">
+        <ol id="searchResults" class="image-list list-view search-results-list"></ol>
+    </div>
+
+</div>
+<script>
+
+
+
+
+
+    //search option
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('searchInput');
+        var searchResultsContainer = document.getElementById('searchResultsContainer');
+        var searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', function () {
+            var searchText = searchInput.value.trim();
+
+            if (searchText !== '') {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/books/search?title=' + encodeURIComponent(searchText), true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        var books = JSON.parse(xhr.responseText);
+                        showSearchResults(books);
+                    }
+                };
+
+                xhr.send();
+            } else {
+                hideSearchResults();
+            }
+        });
+
+        function showSearchResults(books) {
+            // Clear previous search results
+            searchResults.innerHTML = '';
+
+            // Add new search results
+            if (books.length > 0) {
+                var ol = document.createElement('ol');
+                ol.classList.add('search-results-list');
+                ol.classList.add('image-list');
+                ol.classList.add('list-view');
+
+                books.forEach(function (book) {
+                    var li = document.createElement('li');
+                    li.innerHTML = '<figure>' +
+                        '<img class="book-image" src="nature1.jpg" alt="">' +
+                        '<figcaption>' +
+
+                        '<p>' + book.title + '</p>' +
+                        '<p>Written By ' + book.author + '</p>' +
+                        '<p>#' + book.isbn + '</p>' +
+                        '<p>' + book.status + '</p>' +
+                        '</figcaption>' +
+                        '</figure>';
+
+                    ol.appendChild(li);
+                });
+
+                searchResults.appendChild(ol);
+                searchResultsContainer.classList.add('show');
+            } else {
+                hideSearchResults();
+            }
+        }
+
+        function hideSearchResults() {
+            searchResultsContainer.classList.remove('show');
+        }
+    });
+
+</script>
 
 </body>
 </html>
