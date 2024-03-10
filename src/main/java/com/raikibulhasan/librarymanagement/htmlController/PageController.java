@@ -48,13 +48,8 @@ public class PageController { //
      }
 
     @PostMapping("/login")
-    public String viewmodel(int page,Model model){
-        int pageSize = 10; // Number of books per page
-        Page<Book> bookPage = bookService.getBooksPage(PageRequest.of(page, pageSize));
-        List<Book> books = bookPage.getContent();
-        model.addAttribute("books", books);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", bookPage.getTotalPages());
+    public String viewmodel(Model model){
+
 
 
        List<Book> bookList=(List<Book>) bookService.getBooks();
